@@ -1,0 +1,23 @@
+---
+- name: install openldap-client packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - sssd
+    - sssd-client
+    - sssd-ldap
+    - openssh-ldap
+  when: (ansible_facts['distribution'] == "CentOS")
+
+- name: install
+  package:
+    name: "{{ item }}"
+    state: present
+  become: true
+  with_items:
+    - sssd
+    - libnss-sss
+    - libpam-sss
+  when: (ansible_facts['distribution'] == "Debian")

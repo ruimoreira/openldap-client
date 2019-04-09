@@ -1,0 +1,5 @@
+---
+# tasks file for openldap_client
+- import_tasks: install_packages.yml
+- import_tasks: configure_packages.yml
+- import_tasks: configure_services.yml

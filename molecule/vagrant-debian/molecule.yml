@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    box: debian/stretch64
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: playbook.yml
+scenario:
+  name: vagrant-debian
+verifier:
+  name: testinfra
+  directory: ../tests-debian
+  lint:
+    name: flake8

@@ -1,0 +1,15 @@
+---
+# handlers file for openldap_client
+- name: enable sssd
+  service:
+    name: sssd
+    enabled: true
+  become: true
+  notify:
+    - start sssd
+
+- name: start sssd
+  service:
+    name: sssd
+    state: started
+  become: true
