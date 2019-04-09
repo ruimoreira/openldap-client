@@ -1,0 +1,8 @@
+---
+- name: enable sssd
+  service:
+    name: sssd
+    enabled: true
+  become: true
+  notify:
+    - start sssd

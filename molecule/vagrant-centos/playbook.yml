@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    domain: moreira.dom
+    ldap_domain: dc=moreira,dc=dom
+    ldap_users_ou: ou=Users
+    ldap_groups_ou: ou=Groups
+  roles:
+    - role: openldap-client

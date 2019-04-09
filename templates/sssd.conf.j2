@@ -1,0 +1,40 @@
+[sssd]
+config_file_version = 2
+reconnection_retries = 3
+sbus_timeout = 30
+services = nss, pam
+domains = {{ domain }}
+
+[domain/{{ domain }}]
+
+autofs_provider = ldap
+cache_credentials = False
+enumerate = true
+ldap_search_base = {{ ldap_domain }}
+id_provider = ldap
+auth_provider = ldap
+chpass_provider = ldap
+ldap_uri = ldap://{{ ansible_fqdn }}:389
+ldap_id_use_start_tls = False
+ldap_tls_cacertdir = /etc/openldap/cacerts
+ldap_schema = rfc2307
+#ldap_auth_disable_tls_never_use_in_production = true
+#use_fully_qualified_names = True
+ldap_user_search_base = {{ ldap_users_ou }},{{ ldap_domain }}
+ldap_group_search_base = {{ ldap_groups_ou }},{{ ldap_domain }}
+ldap_user_object_class = posixAccount
+ldap_user_gecos = cn
+
+[nss]
+filter_groups = root
+filter_users = root
+reconnection_retries = 3
+#entry_cache_timeout = 300
+entry_cache_nowait_percentage = 75
+
+[pam]
+reconnection_retries = 3
+offline_credentials_expiration = 2
+offline_failed_login_attempts = 3
+offline_failed_login_delay = 5
+[autofs]

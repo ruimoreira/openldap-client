@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    box: centos/7
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: vagrant-centos
+verifier:
+  name: testinfra
+  directory: ../tests-centos
+  lint:
+    name: flake8

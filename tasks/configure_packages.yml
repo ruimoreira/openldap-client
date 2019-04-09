@@ -1,0 +1,29 @@
+---
+- name: add sss to nsswitch
+  lineinfile:
+    path: /etc/nsswitch.conf
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "passwd:     files sss"
+    - "shadow:     files sss"
+    - "group:      files sss"
+  become: true
+
+- name: configure sssd
+  template:
+    src: templates/sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+
+- name: configure ldap client
+  template:
+    src: templates/openldap.conf.j2
+    dest: /etc/openldap/openldap.conf
+    owner: root
+    group: root
+    mode: 0600
+  become: true
